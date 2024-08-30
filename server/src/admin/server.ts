@@ -25,7 +25,6 @@ import SlackLoginHandler, {
   SLACK_LOGIN_ROUTE,
 } from 'server/src/admin/routes/SlackLoginHandler.ts';
 import type { RequestWithContext } from 'server/src/RequestContext.ts';
-import { slackAdminLoginURL } from 'server/src/slack/util.ts';
 import type { Session } from 'server/src/auth/index.ts';
 import { getSessionFromAuthHeader } from 'server/src/auth/session.ts';
 import {
@@ -103,7 +102,7 @@ export async function adminMain(port: ListenPort) {
           secure: true,
           sameSite: 'lax',
         })
-        .redirect(slackAdminLoginURL(nonce, req.originalUrl));
+        .redirect(`/${SLACK_LOGIN_ROUTE}`);
     }
 
     return next();
