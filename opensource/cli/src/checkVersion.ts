@@ -25,7 +25,7 @@ export async function checkVersion() {
   // fetch latest version from npm
   // update env variables
   // if outdated, print update message
-  const res = await fetch('https://api.cord.com/v1/cli-version');
+  const res = await fetch('https://local.cord.com:8161/v1/cli-version');
   const response = (await res.json()) as { version: string };
   const publishedVersion: string = response.version;
   await updateEnvVariables({
