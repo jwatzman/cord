@@ -532,7 +532,7 @@ export async function sendMessageToCord(
   slackChannelID?: string,
   clackChannel?: string,
 ): Promise<void> {
-  if (process.env.IS_TEST) {
+  if (process.env.IS_TEST || 1 === 1) {
     return;
   }
   if (!slackChannelID && !clackChannel) {

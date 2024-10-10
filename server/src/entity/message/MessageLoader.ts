@@ -15,7 +15,7 @@ import { anonymousLogger } from 'server/src/logging/Logger.ts';
 import { asyncFilter } from 'common/util/asyncFilter.ts';
 
 // Don't let clients hammer our database with outrageous requests
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 1000000;
 
 interface LoadMessagesArgs {
   cursor?: UUID;

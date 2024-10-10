@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as ReactDOM from 'react-dom';
-import { CordProvider } from '@cord-sdk/react';
+import { CordProvider, thread } from '@cord-sdk/react';
 import { API_SERVER_HOST, APP_SERVER_HOST } from 'common/const/Urls.ts';
 
 function App() {
@@ -40,10 +40,17 @@ function App() {
 }
 
 function Empty() {
+  const { messages, hasMore, loading, fetchMore } = thread.useThread('abc123');
+  useEffect(() => {
+    if (!loading && hasMore) {
+      void fetchMore(100000);
+    }
+  });
   return (
     <div>
       <h1>This app intentionally left blank.</h1>
       <div>If you are reading this, Cord SDK init worked at least.</div>
+      <div>Num messages: {messages.length}</div>
     </div>
   );
 }
