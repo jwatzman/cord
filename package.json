@@ -248,7 +248,6 @@
     "@cspell/eslint-plugin": "^6.31.1",
     "@luckycatfactory/esbuild-graphql-loader": "^3.7.0",
     "@microsoft/tsdoc": "^0.14.2",
-    "@sentry/cli": "^2.10.0",
     "@types/analytics-node": "^3.1.5",
     "@types/auth0": "^3.3.3",
     "@types/backo2": "^1.0.1",
