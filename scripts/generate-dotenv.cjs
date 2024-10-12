@@ -205,8 +205,6 @@ function buildProdEnv(commitHash) {
     STRIPE_WEBHOOK_SECRET_KEY: secrets.STRIPE_SECRET_KEY.webhook_prod_key,
     DEMO_APPS_SHARED_SECRET: secrets.DEMO_APPS_SHARED_SECRET.key,
     LOOPS_SO_API_KEY: secrets.LOOPS_SO_API_KEY.api_key,
-    IGNORE_ADMIN_SERVER_WORKER: false,
-    IGNORE_CONSOLE_SERVER_WORKER: false,
   };
 }
 
