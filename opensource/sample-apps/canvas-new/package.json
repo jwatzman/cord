@@ -7,6 +7,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node@^4.9.6"
+    }
+  },
   "dependencies": {
     "@cord-sdk/react": "^1.41.0",
     "classnames": "^2.5.1",
