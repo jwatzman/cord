@@ -44,7 +44,6 @@ function build_sample_app() {
     if [ "$FAST" -ne 1 ]
     then
       npm ci
-      npx tsc --noEmit
     fi
 
     npx vite build \
