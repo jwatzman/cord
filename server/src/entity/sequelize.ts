@@ -249,10 +249,10 @@ const apiSequelizeOptions: SequelizeOptions = {
   },
   pool: {
     // Maximum number of connection in pool
-    max: 50,
+    max: 10,
 
     // Minimum number of connection in pool
-    min: 50,
+    min: 1,
 
     // The number of times a connection can be used before discarding it for a
     // replacement
@@ -377,7 +377,7 @@ function getSequelizeOptions(
         ...apiSequelizeOptions,
         pool: {
           ...apiSequelizeOptions.pool,
-          max: 20,
+          max: 5,
           min: 0,
         },
       };
