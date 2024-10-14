@@ -4,21 +4,14 @@ import Footer from 'docs/server/ui/footer/Footer.tsx';
 import Header from 'docs/server/ui/header/Header.tsx';
 import { NavSidebar } from 'docs/server/ui/nav/Nav.tsx';
 import breakpoints from 'docs/lib/css/emotionMediaQueries.ts';
-import AIChatBot from 'docs/server/routes/chatBot/AIChatBot.tsx';
 
 type ShellProps = {
   children: React.ReactNode;
   showNav?: boolean;
   showFooter?: boolean;
-  showAIChatbot?: boolean;
 };
 
-function Shell({
-  children,
-  showFooter = true,
-  showNav = true,
-  showAIChatbot = true,
-}: ShellProps) {
+function Shell({ children, showFooter = true, showNav = true }: ShellProps) {
   return (
     <div css={{ position: 'relative' }}>
       <Header />
@@ -43,7 +36,6 @@ function Shell({
         </div>
         {showFooter && <Footer />}
       </div>
-      {showAIChatbot && <AIChatBot />}
     </div>
   );
 }
