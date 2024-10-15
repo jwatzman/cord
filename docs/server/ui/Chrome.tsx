@@ -15,8 +15,6 @@ interface ChromeProps {
 const Chrome = ({ children, path, host, title }: ChromeProps): JSX.Element => {
   const embeddingModeContext = useContext(EmbeddingModeContext);
 
-  const isDevEnv = host.includes('local.cord.com');
-
   return (
     <html lang="en">
       <head>
@@ -58,7 +56,6 @@ const Chrome = ({ children, path, host, title }: ChromeProps): JSX.Element => {
               rel="stylesheet"
               type="text/css"
             />
-            {!isDevEnv && <script src="/static/js/analytics.js"></script>}
           </>
         )}
       </head>
