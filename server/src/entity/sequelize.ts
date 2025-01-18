@@ -249,7 +249,7 @@ const apiSequelizeOptions: SequelizeOptions = {
   },
   pool: {
     // Maximum number of connection in pool
-    max: 10,
+    max: 15,
 
     // Minimum number of connection in pool
     min: 1,
@@ -259,8 +259,8 @@ const apiSequelizeOptions: SequelizeOptions = {
     maxUses: 500,
 
     // Time out if the pool doesn't manage to establish a new connection within
-    // 10 seconds
-    acquire: 10000,
+    // 15 seconds
+    acquire: 15000,
   },
   hooks: {
     // on any new database connection we set the search path, so when
@@ -290,9 +290,9 @@ const apiSequelizeOptions: SequelizeOptions = {
     },
   },
   dialectOptions: {
-    // any SQL statement should timeout after 10s (10s is very conservative, we
+    // any SQL statement should timeout after 15s (15s is very conservative, we
     // might want to reduce it further eventually).
-    statement_timeout: 10000,
+    statement_timeout: 15000,
     // a transaction that does not send a statement for 5s should timeout
     idle_in_transaction_session_timeout: 5000,
   },
