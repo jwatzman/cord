@@ -437,6 +437,7 @@ async function createThreadWithMessageIfNotExist({
         where: {
           threadID: threadEntity.id,
         },
+        transaction,
       });
 
       if (messagesCount < 1) {
@@ -578,6 +579,7 @@ async function addThreadToPageWithDummyDataIfNotExist({
     where: {
       threadID: threadEntity.id,
     },
+    transaction,
   });
 
   if (messagesCount < 1) {
@@ -722,6 +724,7 @@ async function createThreadWithMentionIfNotExist({
         where: {
           threadID: threadEntity.id,
         },
+        transaction,
       });
 
       if (messagesCount < 1) {
@@ -806,6 +809,7 @@ async function markPageVisitedByViewerIfNotExist({
       orgID,
       pageContextHash,
     },
+    transaction,
   });
   if (pageVisitor) {
     return;
@@ -913,13 +917,16 @@ async function addExternalNotificationIfNotExist({
         throw new Error('Just creatd message for notif user, where is it');
       }
 
-      await new NotificationMutator(sender).create({
-        recipientID,
-        type: 'reply',
-        messageID: message.id,
-        replyActions: ['create-thread'],
-        threadID: message.threadID,
-      });
+      await new NotificationMutator(sender).create(
+        {
+          recipientID,
+          type: 'reply',
+          messageID: message.id,
+          replyActions: ['create-thread'],
+          threadID: message.threadID,
+        },
+        transaction,
+      );
     }),
   ]);
 }
