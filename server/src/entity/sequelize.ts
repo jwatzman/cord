@@ -293,8 +293,8 @@ const apiSequelizeOptions: SequelizeOptions = {
     // any SQL statement should timeout after 15s (15s is very conservative, we
     // might want to reduce it further eventually).
     statement_timeout: 15000,
-    // a transaction that does not send a statement for 10s should timeout
-    idle_in_transaction_session_timeout: 10000,
+    // a transaction that does not send a statement for 5s should timeout
+    idle_in_transaction_session_timeout: 5000,
   },
 };
 
