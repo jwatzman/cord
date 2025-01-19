@@ -714,6 +714,7 @@ async function createThreadWithMentionIfNotExist({
       const mentionedUser = await context.loaders.userLoader.loadUserInOrg(
         mentionedUserID,
         orgID,
+        transaction,
       );
 
       if (!mentionedUser) {

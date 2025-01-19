@@ -1,5 +1,6 @@
 import DataLoader from 'dataloader';
 import { unique } from 'radash';
+import type { Transaction } from 'sequelize';
 import { QueryTypes } from 'sequelize';
 import type { Viewer } from 'server/src/auth/index.ts';
 import {
@@ -249,7 +250,11 @@ export class UserLoader {
     });
   }
 
-  async loadUsersInOrg(userIDs: UUID[], orgID: UUID) {
+  async loadUsersInOrg(
+    userIDs: UUID[],
+    orgID: UUID,
+    transaction?: Transaction,
+  ) {
     return await getSequelize().query<UserEntity>(
       `
       SELECT users.* FROM users, org_members
@@ -261,12 +266,13 @@ export class UserLoader {
         bind: [userIDs, orgID],
         type: QueryTypes.SELECT,
         model: UserEntity,
+        transaction,
       },
     );
   }
 
-  async loadUserInOrg(userID: UUID, orgID: UUID) {
-    const results = await this.loadUsersInOrg([userID], orgID);
+  async loadUserInOrg(userID: UUID, orgID: UUID, transaction?: Transaction) {
+    const results = await this.loadUsersInOrg([userID], orgID, transaction);
     return results.length > 0 ? results[0] : null;
   }
 
