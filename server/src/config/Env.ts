@@ -172,19 +172,6 @@ export default magicEnv(process.env, {
   SENTRY_RELEASE: optional,
   SENTRY_TRACE_SAMPLE_RATE: optional,
 
-  // Auth0 Environment variables
-  // 1) For SPA application
-  AUTH0_CLIENT_ID: required,
-  AUTH0_CUSTOM_LOGIN_DOMAIN: required,
-
-  // 2) For verifying incoming events
-  AUTH0_WEBHOOK_SECRET: required,
-
-  // 3) For server to server communication
-  AUTH0_MTM_CLIENT_ID: required,
-  AUTH0_MTM_CLIENT_SECRET: required,
-  AUTH0_GENERAL_DOMAIN: required,
-
   // console.cord.com cord app credentials
   DEV_CONSOLE_CORD_APP_SECRET: required,
 

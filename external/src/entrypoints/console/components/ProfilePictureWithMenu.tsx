@@ -9,11 +9,9 @@ import {
   Divider,
 } from '@material-ui/core';
 import { createUseStyles } from 'react-jss';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import { Sizes } from 'common/const/Sizes.ts';
 import { Colors } from 'common/const/Colors.ts';
-import { CONSOLE_ORIGIN } from 'common/const/Urls.ts';
 
 const useStyles = createUseStyles({
   profileIcon: {
@@ -36,8 +34,6 @@ export function ProfilePictureWithMenu({ name, email, pictureURL }: Props) {
   const classes = useStyles();
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
-
-  const { logout } = useAuth0();
 
   return (
     <>
@@ -66,11 +62,7 @@ export function ProfilePictureWithMenu({ name, email, pictureURL }: Props) {
           </ListItem>
         )}
         {(name || email) && <Divider style={{ marginBottom: '8px' }} />}
-        <MenuItem
-          onClick={() => logout({ returnTo: `${CONSOLE_ORIGIN}/login` })}
-        >
-          Log out
-        </MenuItem>
+        <MenuItem onClick={() => {}}>Log out</MenuItem>
       </Menu>
     </>
   );

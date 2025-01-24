@@ -9,7 +9,6 @@ export const ADMIN_SERVER_HOST = process.env.ADMIN_SERVER_HOST!;
 export const CONSOLE_SERVER_HOST = process.env.CONSOLE_SERVER_HOST!;
 export const MARKETING_SERVER_HOST = process.env.MARKETING_SERVER_HOST!;
 export const CORD_TO_HOST = process.env.CORD_TO_HOST!;
-export const AUTH0_CUSTOM_LOGIN_DOMAIN = process.env.AUTH0_CUSTOM_LOGIN_DOMAIN!;
 export const DOCS_SERVER_HOST = process.env.DOCS_SERVER_HOST!;
 export const SLACK_APP_REDIRECT_HOST = process.env.SLACK_APP_REDIRECT_HOST;
 
@@ -20,7 +19,6 @@ export const ADMIN_ORIGIN = 'https://' + process.env.ADMIN_SERVER_HOST;
 export const CONSOLE_ORIGIN = 'https://' + process.env.CONSOLE_SERVER_HOST;
 export const MARKETING_ORIGIN = 'https://' + process.env.MARKETING_SERVER_HOST;
 export const CORD_TO_ORIGIN = 'https://' + process.env.CORD_TO_HOST;
-export const AUTH0_ORIGIN = 'https://' + process.env.AUTH0_CUSTOM_LOGIN_DOMAIN;
 export const DOCS_ORIGIN = 'https://' + process.env.DOCS_SERVER_HOST;
 export const DOCS_AI_CHATBOT_SERVER_HOST =
   process.env.DOCS_AI_CHATBOT_SERVER_HOST;

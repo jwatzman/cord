@@ -16,7 +16,7 @@ import { createUseStyles } from 'react-jss';
 import { TableBody } from '@material-ui/core';
 import { EllipsisHorizontalIcon } from '@heroicons/react/20/solid';
 import { useCallback, useState } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import { ConsoleAuthContext } from 'external/src/entrypoints/console/contexts/ConsoleAuthContextProvider.tsx';
 import type { ConsoleUsersQueryResult } from 'external/src/entrypoints/console/graphql/operations.ts';
 import {
   useConsoleUserQuery,
@@ -31,6 +31,7 @@ import { getPrettyCustomerName } from 'external/src/entrypoints/console/utils.ts
 import { Toast } from 'external/src/entrypoints/console/ui/Toast.tsx';
 import { Colors } from 'common/const/Colors.ts';
 import { SPACING_BASE } from 'external/src/entrypoints/console/components/Layout.tsx';
+import { useContextThrowingIfNoProvider } from 'external/src/effects/useContextThrowingIfNoProvider.ts';
 
 const useStyles = createUseStyles({
   boxContent: {
@@ -317,7 +318,9 @@ export function UserManagement() {
   const [isUserCreationModalShown, setIsUserCreationModalShown] =
     useState(false);
   const { data, loading, refetch } = useConsoleUsersQuery();
-  const { user } = useAuth0();
+  const {
+    auth0: { user },
+  } = useContextThrowingIfNoProvider(ConsoleAuthContext);
 
   const [toastMessage, setToastMessage] = useState<string>('');
 

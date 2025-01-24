@@ -30,7 +30,7 @@ import { Spinner } from 'external/src/components/ui/Spinner.tsx';
 import { pluralize } from '@cord-sdk/react/common/util.ts';
 import { Sizes } from 'common/const/Sizes.ts';
 import { Styles } from 'common/const/Styles.ts';
-import { withLoadingUntilConnected } from 'external/src/entrypoints/console/components/ProtectedRoute.tsx';
+import { protectUntilConnected } from 'external/src/entrypoints/console/components/ProtectedRoute.tsx';
 import {
   ApplicationCreationModal,
   CreateAppForm,
@@ -249,7 +249,7 @@ const useClickableRowStyles = createUseStyles({
   },
 });
 
-const ApplicationsOverview = withLoadingUntilConnected(
+const ApplicationsOverview = protectUntilConnected(
   function ApplicationsOverview({
     createAppButton,
     applicationsData,

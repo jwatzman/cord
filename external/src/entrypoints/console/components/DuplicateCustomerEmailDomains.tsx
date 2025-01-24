@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { User } from '@auth0/auth0-react';
 import { createUseStyles } from 'react-jss';
 import { Button, Typography } from '@mui/material';
 import { useRequestAccessToCustomerMutation } from 'external/src/entrypoints/console/graphql/operations.ts';
@@ -34,7 +33,7 @@ const useStyles = createUseStyles({
 
 type DuplicationCustomerEmailDomainsProps = {
   customerIDs?: string[] | null;
-  user?: User;
+  user?: { email: string };
   createNewCustomer: () => void;
   customerName?: string | null;
 };

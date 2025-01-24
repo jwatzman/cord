@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import * as path from 'path';
 import express from 'express';
+import { sign } from 'jsonwebtoken';
 import env from 'server/src/config/Env.ts';
 
 import { RequestContextMiddleware } from 'server/src/middleware/request_context.ts';
@@ -28,6 +29,15 @@ export async function consoleMain(port: ListenPort) {
   app.use(apolloMiddleware);
   app.use(express.json());
   app.use(express.static(path.resolve(env.CONSOLE_SERVER_STATIC_PATH)));
+
+  app.get('/consolelogin/(*)', (req, resp) => {
+    resp.send(
+      sign({ email: req.params[0] }, env.JWT_SIGNING_SECRET + 'auth0', {
+        algorithm: 'HS256',
+        issuer: 'auth0',
+      }),
+    );
+  });
 
   app.get('*', (request, response) => {
     response.sendFile(

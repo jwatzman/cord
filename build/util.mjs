@@ -54,8 +54,6 @@ const requiredBrowserEnvFields = [
   'DOCS_SERVER_HOST',
   'COMMUNITY_SERVER_HOST',
   'CORD_TO_HOST',
-  'AUTH0_CUSTOM_LOGIN_DOMAIN',
-  'AUTH0_CLIENT_ID',
   'DOCS_AI_CHATBOT_SERVER_HOST',
 ];
 const optionalBrowserEnvFields = [

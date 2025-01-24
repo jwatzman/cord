@@ -90,7 +90,6 @@ type Mutation {
     priority: AdminCRTPriority
   ): SuccessResult!
   updateCustomerName(name: String!): SuccessResult!
-  updateUserDetails(id: String!, name: String!): SuccessResult!
   updateAccessToCustomer(
     email: String!
     approveAccess: Boolean!

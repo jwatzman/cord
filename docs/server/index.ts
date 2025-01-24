@@ -151,8 +151,6 @@ async function main() {
 
   const app = express();
 
-  app.use(cors({ origin: `https://${Env.AUTH0_CUSTOM_LOGIN_DOMAIN}` }));
-
   app.enable('trust proxy');
 
   app.get('/health', (_req, response) => {

@@ -1486,11 +1486,6 @@ export type UpdateCustomerNameMutationArgs = {
   name: string;
 };
 
-export type UpdateUserDetailsMutationArgs = {
-  id: string;
-  name: string;
-};
-
 export type UpdateAccessToCustomerMutationArgs = {
   email: string;
   approveAccess: boolean;
@@ -1521,7 +1516,6 @@ export type Mutation = {
   createCustomerIssue: M['SuccessResult'];
   updateCustomerIssue: M['SuccessResult'];
   updateCustomerName: M['SuccessResult'];
-  updateUserDetails: M['SuccessResult'];
   updateAccessToCustomer: M['SuccessResult'];
   requestAccessToCustomer: M['SuccessResult'];
   startCheckout: M['StartCheckoutResult'];
@@ -4663,11 +4657,6 @@ type MutationResolver = {
   updateCustomerName: (
     parent: M['Mutation'],
     args: UpdateCustomerNameMutationArgs,
-    context: RequestContext,
-  ) => M['SuccessResult'] | Promise<M['SuccessResult']>;
-  updateUserDetails: (
-    parent: M['Mutation'],
-    args: UpdateUserDetailsMutationArgs,
     context: RequestContext,
   ) => M['SuccessResult'] | Promise<M['SuccessResult']>;
   updateAccessToCustomer: (

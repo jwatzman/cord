@@ -16,9 +16,9 @@ import {
 } from '@heroicons/react/20/solid';
 import { Route, Link as RouterLink, Routes } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
-import { useAuth0 } from '@auth0/auth0-react';
 import cx from 'classnames';
 
+import { ConsoleAuthContext } from 'external/src/entrypoints/console/contexts/ConsoleAuthContextProvider.tsx';
 import {
   ConsoleApplicationRoutes,
   ConsoleRoutes,
@@ -215,7 +215,9 @@ export default function LayoutLoaded({
   children,
 }: React.PropsWithChildren<LayoutProps>) {
   const classes = useStyles();
-  const { user, isAuthenticated } = useAuth0();
+  const {
+    auth0: { isAuthenticated, user },
+  } = useContextThrowingIfNoProvider(ConsoleAuthContext);
 
   const { customerID } = useContextThrowingIfNoProvider(CustomerInfoContext);
   const isExistingCustomerUser = customerID !== null;
@@ -258,9 +260,9 @@ export default function LayoutLoaded({
             <Toolbar>
               {user ? (
                 <ProfilePictureWithMenu
-                  name={user?.name}
-                  email={user?.email}
-                  pictureURL={user?.picture}
+                  name={undefined}
+                  email={user.email}
+                  pictureURL={undefined}
                 />
               ) : (
                 <div style={{ display: 'flex', gap: 8 }}>

@@ -7,9 +7,8 @@ import { getTokenFromAuthorizationHeader } from 'common/auth/index.ts';
 import { Errors } from 'common/const/Errors.ts';
 import { CLIENT_VERSION_MAX_DAYS_OLD } from 'common/const/Timing.ts';
 import type { JsonObject, Tier } from 'common/types/index.ts';
-import type { Session, Auth0Token } from 'server/src/auth/index.ts';
+import type { Session } from 'server/src/auth/index.ts';
 import {
-  jwksClient,
   Viewer,
   createAnonymousSession,
   AuthProviderType,
@@ -66,24 +65,20 @@ export async function decodeSessionFromJWT(token: string): Promise<Session> {
       },
     );
   }
-  if (
-    decoded?.header?.alg === 'RS256' &&
-    decoded?.payload?.iss === `https://${env.AUTH0_CUSTOM_LOGIN_DOMAIN}/`
-  ) {
+  if (decoded?.payload?.iss === 'auth0') {
     // This is an Auth0 token for the developer console
-    const key = await jwksClient.getSigningKey(decoded?.header?.kid);
-    const validated = verify(token, key.getPublicKey(), {
-      algorithms: ['RS256'],
-    }) as Auth0Token;
+    const validated = verify(token, env.JWT_SIGNING_SECRET + 'auth0', {
+      algorithms: ['HS256'],
+    }) as { email: string };
 
     // All of these below are passed in using the Auth0 Actions Login flow
     // under the add-email-to-token.
     // You can view and edit this in the Auth0 dashboard
-    const email = validated['https://console.cord.com/email'];
-    const email_verified = validated['https://console.cord.com/email_verified'];
-    const auth0UserID = validated['auth0UserID'];
+    const email = validated['email'];
+    const email_verified = true;
+    const auth0UserID = email;
 
-    if (!validated || !validated.sub || !email || !isDefined(email_verified)) {
+    if (!validated || !email || !isDefined(email_verified)) {
       throw new ApiCallerError(
         'invalid_access_token',
         { message: formatInvalidSessionError('Invalid jwt') },

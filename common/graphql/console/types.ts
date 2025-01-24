@@ -732,20 +732,6 @@ export type UpdateSupportBotMutationVariables = {
   name: string;
 };
 
-export type UpdateUserDetailsMutationResult = {
-  updateUserDetails: {
-    success: boolean;
-    failureDetails: Nullable<{
-      message: Nullable<string>;
-    }>;
-  };
-};
-
-export type UpdateUserDetailsMutationVariables = {
-  id: string;
-  name: string;
-};
-
 export type RedirectToStripeCustomerPortalMutationResult = {
   redirectToStripeCustomerPortal: {
     success: boolean;

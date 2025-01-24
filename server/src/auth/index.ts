@@ -1,7 +1,4 @@
-import { JwksClient } from 'jwks-rsa';
-
 import type { UUID } from 'common/types/index.ts';
-import env from 'server/src/config/Env.ts';
 import type { GACookieType } from 'server/src/util/google-analytics.ts';
 import { ClientFacingError } from 'server/src/util/ClientFacingError.ts';
 import type { UserEntity } from 'server/src/entity/user/UserEntity.ts';
@@ -14,10 +11,6 @@ export enum AuthProviderType {
   SLACK = 'slack',
   PLATFORM = 'platform',
 }
-
-export const jwksClient = new JwksClient({
-  jwksUri: `https://${env.AUTH0_CUSTOM_LOGIN_DOMAIN}/.well-known/jwks.json`,
-});
 
 // There is a surprising (and growing) amount of stuff that we'll want to store
 // as part of the user session. It makes sense to write this to a DB on the server

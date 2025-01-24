@@ -146,8 +146,6 @@ import type {
   UpdateCustomerNameMutationVariables,
   UpdateSupportBotMutationResult,
   UpdateSupportBotMutationVariables,
-  UpdateUserDetailsMutationResult,
-  UpdateUserDetailsMutationVariables,
   RedirectToStripeCustomerPortalMutationResult,
   ApplicationFlagQueryResult,
   ApplicationFlagQueryVariables,
@@ -300,8 +298,6 @@ export type {
   UpdateCustomerNameMutationVariables,
   UpdateSupportBotMutationResult,
   UpdateSupportBotMutationVariables,
-  UpdateUserDetailsMutationResult,
-  UpdateUserDetailsMutationVariables,
   RedirectToStripeCustomerPortalMutationResult,
   ApplicationFlagQueryResult,
   ApplicationFlagQueryVariables,
@@ -367,8 +363,6 @@ import { default as UpdateCustomerNameMutation } from 'external/src/entrypoints/
 export { UpdateCustomerNameMutation };
 import { default as UpdateSupportBotMutation } from 'external/src/entrypoints/console/graphql/mutations/UpdateSupportBot.graphql';
 export { UpdateSupportBotMutation };
-import { default as UpdateUserDetailsMutation } from 'external/src/entrypoints/console/graphql/mutations/UpdateUserDetailsMutation.graphql';
-export { UpdateUserDetailsMutation };
 import { default as RedirectToStripeCustomerPortalMutation } from 'external/src/entrypoints/console/graphql/mutations/redirectToStripeCustomerPortal.graphql';
 export { RedirectToStripeCustomerPortalMutation };
 import { default as ApplicationFlagQuery } from 'external/src/entrypoints/console/graphql/queries/ApplicationFlagQuery.graphql';
@@ -687,22 +681,6 @@ export function useUpdateSupportBotMutation<T>(
     UpdateSupportBotMutationResult,
     UpdateSupportBotMutationVariables
   >(UpdateSupportBotMutation, options);
-}
-
-export function useUpdateUserDetailsMutation<T>(
-  options?: MutationHookOptions<
-    UpdateUserDetailsMutationResult,
-    UpdateUserDetailsMutationVariables,
-    T
-  >,
-): MutationReturnType<
-  UpdateUserDetailsMutationResult,
-  UpdateUserDetailsMutationVariables
-> {
-  return useMutation<
-    UpdateUserDetailsMutationResult,
-    UpdateUserDetailsMutationVariables
-  >(UpdateUserDetailsMutation, options);
 }
 
 export function useRedirectToStripeCustomerPortalMutation<T>(
@@ -1256,10 +1234,6 @@ export type MutationTypes = {
     variables: UpdateSupportBotMutationVariables;
     result: UpdateSupportBotMutationResult;
   };
-  UpdateUserDetailsMutation: {
-    variables: UpdateUserDetailsMutationVariables;
-    result: UpdateUserDetailsMutationResult;
-  };
   RedirectToStripeCustomerPortalMutation: {
     variables: Record<string, never>;
     result: RedirectToStripeCustomerPortalMutationResult;
@@ -1286,7 +1260,6 @@ export const mutations: Record<keyof MutationTypes, DocumentNode> = {
   UpdateCustomerIssueInConsoleMutation: UpdateCustomerIssueInConsoleMutation,
   UpdateCustomerNameMutation: UpdateCustomerNameMutation,
   UpdateSupportBotMutation: UpdateSupportBotMutation,
-  UpdateUserDetailsMutation: UpdateUserDetailsMutation,
   RedirectToStripeCustomerPortalMutation:
     RedirectToStripeCustomerPortalMutation,
 };

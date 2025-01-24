@@ -1,16 +1,16 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { createUseStyles } from 'react-jss';
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import { useAuth0 } from '@auth0/auth0-react';
+import { ConsoleAuthContext } from 'external/src/entrypoints/console/contexts/ConsoleAuthContextProvider.tsx';
 import { Colors } from 'common/const/Colors.ts';
 import { Sizes } from 'common/const/Sizes.ts';
 import Box from 'external/src/entrypoints/console/ui/Box.tsx';
 import { SubmitFormResultMessage } from 'external/src/entrypoints/console/components/SubmitFormResultMessage.tsx';
 import { SPACING_BASE } from 'external/src/entrypoints/console/components/Layout.tsx';
 
-import { useUpdateUserDetailsMutation } from 'external/src/entrypoints/console/graphql/operations.ts';
 import { HelpIconWithTooltip } from 'external/src/entrypoints/console/components/HelpIconWithTooltip.tsx';
 import { UnsavedChangesBanner } from 'external/src/entrypoints/console/components/UnsavedChangesBanner.tsx';
+import { useContextThrowingIfNoProvider } from 'external/src/effects/useContextThrowingIfNoProvider.ts';
 
 const useStyles = createUseStyles({
   boxContent: {
@@ -37,64 +37,23 @@ const useStyles = createUseStyles({
 export function SettingsUser() {
   const classes = useStyles();
 
-  const { user, getAccessTokenSilently } = useAuth0();
+  const {
+    auth0: { user },
+  } = useContextThrowingIfNoProvider(ConsoleAuthContext);
 
-  const isSocialsConnectedUser = useMemo(() => {
-    // This shouldn't happen because it's a protected route
-    if (!user?.sub) {
-      return false;
-    }
+  const isSocialsConnectedUser = true;
 
-    const provider = user.sub.split('|')[0];
-
-    return provider !== 'auth0';
-  }, [user]);
-
-  const [updateUserDetails] = useUpdateUserDetailsMutation();
-
-  const [name, setName] = useState(user?.name ?? '');
+  const [name, setName] = useState('');
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
-  const isDirty = useMemo(() => {
-    if (name !== (user?.name ?? '')) {
-      return true;
-    }
-    return false;
-  }, [name, user?.name]);
+  const isDirty = false;
 
   const onSave = useCallback(async () => {
-    // 'sub' is the cryptic name for the auth0 user id
-    if (!user?.sub) {
-      // This shouldn't happen because this is a protected route
-      setErrorMessage('An unexpected error has occurred. Please try again.');
-      return;
-    }
-
-    const result = await updateUserDetails({
-      variables: {
-        id: user.sub,
-        name,
-      },
-    });
-
-    if (result.data?.updateUserDetails.success === false) {
-      setErrorMessage(
-        result.data?.updateUserDetails?.failureDetails?.message ??
-          'An unexpected error has occurred. Please try again.',
-      );
-    } else if (
-      !result.errors &&
-      result.data?.updateUserDetails.success === true
-    ) {
-      setSuccessMessage('Changes saved successfully.');
-      // Refetch the Auth0 user so updated name is reflected around the console
-      void getAccessTokenSilently({ ignoreCache: true });
-    }
     return false;
-  }, [getAccessTokenSilently, name, updateUserDetails, user]);
+  }, []);
 
   const onSubmit = useCallback<React.FormEventHandler<HTMLFormElement>>(
     async (e) => {

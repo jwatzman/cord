@@ -36,7 +36,6 @@ import { getCustomerIssueQueryResolver } from 'server/src/console/queries/get_cu
 import { customerIssuesQueryResolver } from 'server/src/console/queries/customer_issues.ts';
 import { getConsoleCordSessionTokenResolver } from 'server/src/console/queries/console_cord_session_token.ts';
 import { updateCustomerNameResolver } from 'server/src/console/mutations/update_customer_name.ts';
-import { updateUserDetailsMutationResolver } from 'server/src/console/mutations/update_user_details.ts';
 import { updateAccessToCustomerResolver } from 'server/src/console/mutations/update_access_to_customer.ts';
 import { requestAccessToCustomerResolver } from 'server/src/console/mutations/request_access_to_customer.ts';
 import { startCheckoutResolver } from 'server/src/console/mutations/start_checkout.ts';
@@ -121,7 +120,6 @@ export const allConsoleResolvers: Resolvers = {
       createCustomerIssue: createCustomerIssueResolver,
       updateCustomerIssue: updateCustomerIssueResolver,
       updateCustomerName: updateCustomerNameResolver,
-      updateUserDetails: updateUserDetailsMutationResolver,
       updateAccessToCustomer: updateAccessToCustomerResolver,
       requestAccessToCustomer: requestAccessToCustomerResolver,
       startCheckout: startCheckoutResolver,

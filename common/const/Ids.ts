@@ -43,7 +43,6 @@ export const CORD_AUTOMATED_TESTS_APPLICATION_ID =
 export const CLACK_APPLICATION_ID = '5fa22ba9-5446-4af8-bc93-7ce54a9aa0ba';
 export const CORD_HOMEPAGE_APPLICATION_ID =
   '29e6499a-bbed-4eb2-b057-b36d60ad76c9';
-export const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID!;
 
 export const CORD_CUSTOMER_ID = '12ed6251-28d5-4686-9a75-20a15bd31499';
 

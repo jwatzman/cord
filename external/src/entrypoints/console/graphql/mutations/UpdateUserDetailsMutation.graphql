@@ -1,8 +1,0 @@
-mutation UpdateUserDetailsMutation($id: String!, $name: String!) {
-  updateUserDetails(id: $id, name: $name) {
-    success
-    failureDetails {
-      message
-    }
-  }
-}

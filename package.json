@@ -77,7 +77,6 @@
   ],
   "dependencies": {
     "@apollo/client": "~3.10.4",
-    "@auth0/auth0-react": "^1.8.0",
     "@aws-sdk/client-auto-scaling": "^3.363.0",
     "@aws-sdk/client-cloudfront": "^3.363.0",
     "@aws-sdk/client-cloudwatch-logs": "^3.363.0",
@@ -129,7 +128,6 @@
     "ajv-formats": "^2.1.1",
     "apollo-server-core": "^3.12.1",
     "apollo-server-express": "^3.12.1",
-    "auth0": "^3.7.2",
     "axios": "^1.6.8",
     "backo2": "^1.0.2",
     "bluebird": "^3.7.2",
@@ -174,7 +172,6 @@
     "jsdom": "^24.0.0",
     "jsonwebtoken": "^9.0.2",
     "jss": "^10.9.0",
-    "jwks-rsa": "^2.0.5",
     "jwt-encode": "^1.0.1",
     "linkify-react": "^4.1.3",
     "linkifyjs": "^4.1.3",
@@ -246,7 +243,6 @@
     "@luckycatfactory/esbuild-graphql-loader": "^3.7.0",
     "@microsoft/tsdoc": "^0.14.2",
     "@types/analytics-node": "^3.1.5",
-    "@types/auth0": "^3.3.3",
     "@types/backo2": "^1.0.1",
     "@types/bluebird": "^3.5.32",
     "@types/chrome": "^0.0.112",
@@ -311,10 +307,6 @@
     "yargs": "^17.7.2"
   },
   "overrides": {
-    "@auth0/auth0-react": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
-    },
     "@material-ui/core": {
       "react": "^18.2.0",
       "react-dom": "^18.2.0",

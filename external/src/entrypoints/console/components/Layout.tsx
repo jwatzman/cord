@@ -1,5 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
-
 import { useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Loading } from 'external/src/entrypoints/console/components/Loading.tsx';
@@ -16,8 +14,10 @@ export interface LayoutProps {
 export const SPACING_BASE = 8;
 
 export default function Layout(props: React.PropsWithChildren<LayoutProps>) {
-  const { isAuthenticated, isLoading } = useAuth0();
-  const { connected } = useContextThrowingIfNoProvider(ConsoleAuthContext);
+  const {
+    connected,
+    auth0: { isLoading, isAuthenticated },
+  } = useContextThrowingIfNoProvider(ConsoleAuthContext);
 
   const loading = useMemo(
     () => isLoading || (isAuthenticated && !connected),

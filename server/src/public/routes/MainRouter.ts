@@ -89,7 +89,6 @@ import UpdateThreadMessageHandler from 'server/src/public/routes/platform/messag
 import AppendMessageHandler from 'server/src/public/routes/platform/messages/AppendMessageHandler.ts';
 import UpdateUserPresenceHandler from 'server/src/public/routes/platform/presence/UpdateUserPresenceHandler.ts';
 import { Counter, TimeHistogram } from 'server/src/logging/prometheus.ts';
-import Auth0LogsHandler from 'server/src/public/routes/handlers/Auth0LogsHandler.ts';
 import ListMessagesHandler from 'server/src/public/routes/platform/messages/ListMessagesHandler.ts';
 import ListUserPreferencesHandler from 'server/src/public/routes/platform/preferences/ListUserPreferencesHandler.ts';
 import UpdateUserPreferencesHandler from 'server/src/public/routes/platform/preferences/UpdateUserPreferencesHandler.tsx';
@@ -654,9 +653,6 @@ MainRouter.get(
   }),
   DemoUserHandler,
 );
-
-// Auth0 logs
-MainRouter.post('/logs/auth0', Auth0LogsHandler);
 
 if (env.INCLUDE_SDK_TESTBED) {
   MainRouter.get('/sdk/test/tokens', TestbedTokensHandler);

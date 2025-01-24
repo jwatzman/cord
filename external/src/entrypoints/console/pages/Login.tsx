@@ -2,21 +2,21 @@ import * as cookie from 'cookie';
 
 import { useCallback, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { ConsoleRoutes } from 'external/src/entrypoints/console/routes.ts';
 import { useSyncUserMutation } from 'external/src/entrypoints/console/graphql/operations.ts';
 import { useContextThrowingIfNoProvider } from 'external/src/effects/useContextThrowingIfNoProvider.ts';
 import { ConsoleAuthContext } from 'external/src/entrypoints/console/contexts/ConsoleAuthContextProvider.tsx';
 import { CustomerInfoContext } from 'external/src/entrypoints/console/contexts/CustomerInfoProvider.tsx';
-import { CONSOLE_ORIGIN } from 'common/const/Urls.ts';
 import { DuplicationCustomerEmailDomains } from 'external/src/entrypoints/console/components/DuplicateCustomerEmailDomains.tsx';
 
 const FORCE_CREATE_NEW_CUSTOMER_KEY = 'cord_create_new_customer';
 // We have set /login as our Auth0 Application login URI.
 // In some scenarios, Auth0 will need to redirect users here.
 export default function Login() {
-  const { isLoading, user, isAuthenticated, loginWithRedirect } = useAuth0();
-  const { connected } = useContextThrowingIfNoProvider(ConsoleAuthContext);
+  const {
+    connected,
+    auth0: { isLoading, isAuthenticated, doFakeLogin, user },
+  } = useContextThrowingIfNoProvider(ConsoleAuthContext);
   const { refetch: refetchCustomerInfo } =
     useContextThrowingIfNoProvider(CustomerInfoContext);
   const [syncUser] = useSyncUserMutation();
@@ -51,9 +51,9 @@ export default function Login() {
 
       syncUser({
         variables: {
-          email: user?.email as string,
-          name: user?.name,
-          picture: user?.picture,
+          email: user.email,
+          name: undefined,
+          picture: undefined,
           signupCoupon,
           createNewCustomer: Boolean(createNewCustomerParam),
         },
@@ -75,8 +75,8 @@ export default function Login() {
     void syncUser({
       variables: {
         email: user?.email as string,
-        name: user?.name,
-        picture: user?.picture,
+        name: undefined,
+        picture: undefined,
         signupCoupon,
         createNewCustomer: true,
       },
@@ -88,7 +88,7 @@ export default function Login() {
         refetchCustomerInfo?.();
       })
       .catch((_) => setUpdated({ success: false }));
-  }, [refetchCustomerInfo, syncUser, user?.email, user?.name, user?.picture]);
+  }, [refetchCustomerInfo, syncUser, user?.email]);
 
   if (isLoading) {
     // Don't show anything on screen til we know the Auth0 status, as we may
@@ -98,9 +98,23 @@ export default function Login() {
   if (!isLoading && !isAuthenticated) {
     // When we can't authenticate a user/ a user is in password reset flow
     // we redirect them to auth0's /authorize endpoint
-    void loginWithRedirect({
-      redirectUri: CONSOLE_ORIGIN + ConsoleRoutes.LOGIN,
-    });
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target as any);
+          doFakeLogin(fd.get('email') as string);
+        }}
+      >
+        <div>
+          <label htmlFor="email">Email:</label>
+        </div>
+        <div>
+          <input type="text" id="email" name="email" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    );
   }
 
   if (!updated) {
