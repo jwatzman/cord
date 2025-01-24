@@ -2,7 +2,6 @@ import type { Request } from 'express';
 import { Router } from 'express';
 import cors from 'cors';
 import multer from 'multer';
-import basicAuth from 'express-basic-auth';
 import responseTime from 'response-time';
 import { v4 as uuid } from 'uuid';
 
@@ -60,7 +59,6 @@ import {
   SLACK_EVENT_PATH,
   SLACK_INTERACTIVE_EVENT_PATH,
 } from 'server/src/const.ts';
-import SendGridWebhookHandler from 'server/src/public/routes/handlers/SendGridWebhookHandler.ts';
 import env from 'server/src/config/Env.ts';
 import NotificationRedirectURIHandler from 'server/src/public/routes/notification-uri-test/NotificationRedirectURIHandler.ts';
 import GetDemoAppsSignedTokenHandler from 'server/src/public/routes/demo-apps/GetDemoAppsSignedTokenHandler.ts';
@@ -189,40 +187,12 @@ MainRouter.post(LINEAR_EVENTS_PATH, LinearEventApiHandler);
 // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Disabling for pre-existing problems. Please do not copy this comment, and consider fixing this one!
 MainRouter.post(MONDAY_EVENTS_PATH, MondayEventApiHandler);
 
-const ignoreUploadedFiles = multer({
-  // Filter out all files to not store them for now but
-  // still pass on the message.
-  fileFilter: (_req, _file, cb) => {
-    cb(null, false);
-  },
-}); // for parsing multipart/form-data
 const uploadedFiles = multer({
   dest: '/tmp/uploads/',
   limits: {
     fileSize: MAX_UPLOAD_SIZE,
   },
 });
-// Sendgrid's Inbound Parse webhook endpoint
-MainRouter.post(
-  '/sendgrid',
-
-  // Only SendGrid should be able to post to this endpoint
-  basicAuth({
-    users: {
-      [env.SENDGRID_INBOUND_WEBHOOK_USER]:
-        env.SENDGRID_INBOUND_WEBHOOK_PASSWORD,
-    },
-  }),
-
-  // parse multipart/form-data
-  // Allow all files through to not throw an error
-  // and drop replies with attachments.
-  // (TODO) Properly implement support for attachments by
-  // uploading files to s3 and attaching to message.
-  ignoreUploadedFiles.any(),
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises -- Disabling for pre-existing problems. Please do not copy this comment, and consider fixing this one!
-  SendGridWebhookHandler,
-);
 
 MainRouter.get(
   TYPEFORM_NOTIFICATION_LOGGING_PATH + '/:redirectID',

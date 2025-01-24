@@ -158,13 +158,6 @@ export default magicEnv(process.env, {
   // path to static files for the docs app
   DOCS_SERVER_STATIC_PATH: defaultValue('dist/docs/static'),
 
-  // API key used to send transactional email notifications through Sendgrid.
-  SENDGRID_API_KEY: required,
-
-  // HTTP Basic Auth name and password for SendGrid's Inbound Parse webhooks
-  SENDGRID_INBOUND_WEBHOOK_USER: required,
-  SENDGRID_INBOUND_WEBHOOK_PASSWORD: required,
-
   // Number of extra workers to run the api server in: 'auto' makes one per CPU; otherwise a specific number can be used
   NUM_WORKERS: optional,
 
