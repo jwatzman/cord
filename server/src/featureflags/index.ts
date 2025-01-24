@@ -1,10 +1,8 @@
-import * as LaunchDarkly from '@launchdarkly/node-server-sdk';
 import type {
   ApplicationEnvironment,
   SimpleValue,
   UUID,
 } from 'common/types/index.ts';
-import env from 'server/src/config/Env.ts';
 import type { RequestContext } from 'server/src/RequestContext.ts';
 import { FeatureFlags as CommonFeatureFlags } from 'common/const/FeatureFlags.ts';
 import type { FeatureFlag } from 'common/const/FeatureFlags.ts';
@@ -15,9 +13,6 @@ import {
   DEFAULT_SHARE_TO_EMAIL_TEMPLATE_ID,
   DEFAULT_THREAD_RESOLVE_TEMPLATE_ID,
 } from 'server/src/email/index.ts';
-
-let client: LaunchDarkly.LDClient | undefined = undefined;
-let clientReady = false;
 
 // ADD NEW FLAGS HERE IF THEY ARE ONLY USED SERVER-SIDE.
 // If the new flag is also going to be used client side (in external/)
@@ -100,25 +95,11 @@ type MockClient =
 // This is used in our test environments
 let mockClient: MockClient;
 
-export async function initFeatureFlags() {
-  if (client) {
-    throw new Error('Feature flags already initialized');
-  }
-  if (!env.LAUNCHDARKLY_API_KEY) {
-    return;
-  }
-  client = LaunchDarkly.init(env.LAUNCHDARKLY_API_KEY);
-  await client.waitForInitialization();
-  clientReady = true;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export async function initFeatureFlags() {}
 
-export function closeFeatureFlags() {
-  if (client) {
-    client.close();
-    client = undefined;
-    clientReady = false;
-  }
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export function closeFeatureFlags() {}
 
 export type FlagsUser = {
   userID: UUID | 'anonymous';
@@ -180,42 +161,7 @@ export async function getFeatureFlagValue(key: string, user: FlagsUser) {
   if (mockClient) {
     return await mockClient(key, user);
   }
-  if (!client || !clientReady) {
-    return null;
-  }
-  const versionValue = versionToNumber(user.version);
-  const ldUser = {
-    // The choice of delimiter here is restricted by LaunchDarkly's website
-    // currently being flaky for users with a key that contains characters that
-    // need to be percent-encoded, so we need to choose something that doesn't
-    // get encoded.
-    key: user.orgID ? `${user.userID}_${user.orgID}` : user.userID,
-    custom: {
-      userID: user.userID,
-      ...(user.orgID && { orgID: user.orgID }),
-      platformApplicationID: user.platformApplicationID,
-      ...(versionValue && { version: versionValue }),
-      ...(user.customerID && { customerID: user.customerID }),
-      ...(user.appEnvironment && { appEnvironment: user.appEnvironment }),
-    },
-  };
-  return await (client.variation(key, ldUser, null) as Promise<
-    boolean | string | number | null
-  >);
-}
-
-function versionToNumber(version: string | null): number | null {
-  if (!version) {
-    return null;
-  }
-  if (version.startsWith('dev-')) {
-    return -1;
-  }
-  const match = version.match(/^(\d+)[.](\d+)[.](\d+)$/);
-  if (!match) {
-    return null;
-  }
-  return 100000 * (parseInt(match[1], 10) - 1) + parseInt(match[2], 10);
+  return null;
 }
 
 export function initMockFeatureFlagForTest(fn: MockClient) {

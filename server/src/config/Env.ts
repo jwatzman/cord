@@ -165,9 +165,6 @@ export default magicEnv(process.env, {
   SENDGRID_INBOUND_WEBHOOK_USER: required,
   SENDGRID_INBOUND_WEBHOOK_PASSWORD: required,
 
-  // API key used to fetch feature flags from LaunchDarkly
-  LAUNCHDARKLY_API_KEY: optional,
-
   // Number of extra workers to run the api server in: 'auto' makes one per CPU; otherwise a specific number can be used
   NUM_WORKERS: optional,
 

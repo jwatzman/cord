@@ -39,7 +39,6 @@ const secretIDs = {
   FILE_PROXY_SIGNING_SECRET: 'file_proxy_signing_secret',
   EMAIL_LINKS_TOKEN: 'email_links_token_secret',
   SLACK_ADMIN_LOGIN: 'slack_admin_login_app',
-  LAUNCHDARKLY: 'launchdarkly_api',
   DEV_CONSOLE_CORD_APP: 'dev_console_cord_app',
   ADMIN_TOKEN: 'admin-token-secret',
   DOCS_COOKIE_PARSER: 'docs-cookie-parser-secret',
@@ -179,7 +178,6 @@ function buildProdEnv(commitHash) {
     SENDGRID_INBOUND_WEBHOOK_USER: 'cord',
     SENDGRID_INBOUND_WEBHOOK_PASSWORD:
       secrets.SENDGRID_INBOUND_WEBHOOK.webhook_secret,
-    LAUNCHDARKLY_API_KEY: secrets.LAUNCHDARKLY.prod,
     NUM_WORKERS: 'auto',
     PLATFORM_SECRETS_ENCRYPTION_KEY: secrets.PLATFORM_SECRETS.encryption_key,
     FILE_PROXY_SIGNING_SECRET_KEY: secrets.FILE_PROXY_SIGNING_SECRET.key,
@@ -231,7 +229,6 @@ function buildStagingEnv(commitHash) {
     ADMIN_SERVER_STATIC_PATH: 'dist/staging/server/admin',
     CONSOLE_SERVER_STATIC_PATH: 'dist/staging/server/console',
     DOCS_SERVER_STATIC_PATH: 'dist/staging/docs/static',
-    LAUNCHDARKLY_API_KEY: secrets.LAUNCHDARKLY.staging,
     FILE_PROXY_SIGNING_SECRET_KEY: '12345678901234567890123456789012',
     SENTRY_ENVIRONMENT: 'staging',
     SENTRY_TRACE_SAMPLE_RATE: 0.02,
@@ -344,9 +341,6 @@ function buildDevEnv(commitHash) {
     ADMIN_SERVER_STATIC_PATH: undefined,
     CONSOLE_SERVER_STATIC_PATH: undefined,
     DOCS_SERVER_STATIC_PATH: undefined,
-    // NOTE(flooey): Commenting out to prevent errors when secrets are unavailable
-    // LAUNCHDARKLY_API_KEY: secrets.LAUNCHDARKLY.test,
-    LAUNCHDARKLY_API_KEY: undefined,
     // NOTE(flooey): Remove if secrets are available
     SENDGRID_API_KEY: 'SG.llama',
     NUM_WORKERS: '0',
