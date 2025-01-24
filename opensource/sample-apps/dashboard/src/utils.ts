@@ -3,7 +3,7 @@ import type { ClientCreateMessage, ThreadID } from '@cord-sdk/types';
 import { useEffect, useState } from 'react';
 
 const CORD_TOKEN_LOCALSTORAGE_KEY = 'cord_token';
-const CORD_SAMPLE_TOKEN_ENDPOINT = 'https://api.cord.com/sample-token';
+const CORD_SAMPLE_TOKEN_ENDPOINT = 'https://api.cord.jwatzman.org/sample-token';
 
 const ONE_MINUTE_MS = 60 * 1000;
 const ONE_DAY_MS = ONE_MINUTE_MS * 60 * 24;

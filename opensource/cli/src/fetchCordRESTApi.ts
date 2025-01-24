@@ -5,7 +5,7 @@ import {
 } from '@cord-sdk/server';
 import { getEnvVariables } from 'src/utils';
 
-const DEFAULT_CORD_API_URL = 'https://api.cord.com/v1';
+const DEFAULT_CORD_API_URL = 'https://api.cord.jwatzman.org/v1';
 
 export async function fetchCordRESTApi<T>(
   endpoint: string,

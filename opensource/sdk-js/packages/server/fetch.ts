@@ -16,7 +16,7 @@ export async function fetchCordRESTApi<T>(
     method = 'GET',
     project_id,
     project_secret,
-    api_url = 'https://api.cord.com/',
+    api_url = 'https://api.cord.jwatzman.org/',
     body,
   }: FetchOptions,
 ): Promise<T> {
