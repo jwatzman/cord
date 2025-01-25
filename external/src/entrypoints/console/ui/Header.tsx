@@ -4,7 +4,6 @@ import { createUseStyles } from 'react-jss';
 import { Colors } from 'common/const/Colors.ts';
 import { Sizes } from 'common/const/Sizes.ts';
 // import { PlanBanner } from 'external/src/entrypoints/console/components/PlanBanner.tsx';
-import { ByeByeBanner } from 'external/src/entrypoints/console/components/ByeByeBanner.tsx';
 // import {
 //   ConsoleRoutes,
 //   ConsoleSettingsRoutes,
@@ -56,7 +55,7 @@ export default function Header({ text, rightContent }: HeaderProps) {
 }
 
 function Banners() {
-  return <ByeByeBanner />;
+  return null;
   // const location = useLocation();
   // const billingPath = `${ConsoleRoutes.SETTINGS}/${ConsoleSettingsRoutes.SETTINGS_BILLING}`;
   // const shouldShowPlanBanner = !(
