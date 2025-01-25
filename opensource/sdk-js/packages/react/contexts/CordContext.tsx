@@ -218,7 +218,7 @@ export function CordProvider({
     scriptTag.src =
       overrideCordScriptUrl ??
       cordScriptUrl ??
-      `https://app.cord.com/sdk/v1/sdk.latest.js`;
+      `https://static.cord.jwatzman.org/sdk/v1/sdk.latest.js`;
     scriptTag.addEventListener('load', onLoad);
     document.head.appendChild(scriptTag);
 
@@ -231,11 +231,8 @@ export function CordProvider({
       } else {
         const origin = cordScriptUrl
           ? new URL(cordScriptUrl).origin
-          : 'https://app.cord.com';
-        const isNpmPackage = !isNaN(parseInt(CORD_REACT_PACKAGE_VERSION));
-        const cssHref = isNpmPackage
-          ? `https://app.cord.com/sdk/css/${CORD_REACT_PACKAGE_VERSION}/react-${CORD_REACT_PACKAGE_VERSION}.css`
-          : `${origin}/sdk/css/cord-react.css`;
+          : 'https://static.cord.jwatzman.org';
+        const cssHref = `${origin}/sdk/css/cord-react.css`;
         stylesheetTag.href = cssHref;
       }
       document.head.insertAdjacentElement('afterbegin', stylesheetTag);
