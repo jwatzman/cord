@@ -47,7 +47,7 @@ npm run build
 # numbers of SDK packages in our `package-lock.json`
 ( cd ../.. && npm install )
 
-OUTDIR=$(realpath ../../dist/external/sdk-js)
+OUTDIR="$(realpath ../../dist/external)/sdk-js"
 mkdir "$OUTDIR"
 
 # Publish them to npm
