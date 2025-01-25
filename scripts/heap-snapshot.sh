@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script triggers the taking of a heap snapshot on your local server.  You
 # need to be running the server with heap snapshots enabled (by setting the

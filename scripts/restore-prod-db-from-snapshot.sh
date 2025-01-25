@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 # This script just exits with an error. Read the comment here if you want to use
 # it. It's dangerous, only use it if you understand what you're doing.

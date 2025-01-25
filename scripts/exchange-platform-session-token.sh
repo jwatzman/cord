@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 curl \
   -X POST https://local.cord.com:8161/v1/session \

@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 # Use this script to connect docker to the AWS Elastic Container
 # Registry (ECR).

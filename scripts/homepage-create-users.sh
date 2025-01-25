@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script creates the always-present users referenced in
 # server/src/public/routes/warm-demo-users/HomepageDemoUser.ts.  You can set the

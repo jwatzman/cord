@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 # This script needs to be run on a machine that can connect to our EC2 instances
 # and databases.
