@@ -10,7 +10,10 @@ export function CordApp({ children }: React.PropsWithChildren<any>) {
   return (
     <>
       {data?.consoleCordSessionToken ? (
-        <CordProvider clientAuthToken={data.consoleCordSessionToken}>
+        <CordProvider
+          cordScriptUrl={`https://${process.env.APP_SERVER_HOST}/sdk/v1/sdk.latest.js`}
+          clientAuthToken={data.consoleCordSessionToken}
+        >
           {children}
         </CordProvider>
       ) : (
