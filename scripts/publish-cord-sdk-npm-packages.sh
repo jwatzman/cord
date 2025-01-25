@@ -45,28 +45,19 @@ npm run build
 # numbers of SDK packages in our `package-lock.json`
 ( cd ../.. && npm install )
 
-# Okay we are done
-echo
-echo
-echo "Packages have been rebuilt and are ready for publishing."
-echo "Press ENTER to continue or CTRL-C to abort"
-read i
+rm -rf ../../dist/sdk-js
+mkdir ../../dist/sdk-js
 
 # Publish them to npm
 cd packages
 for i in */
 do
-  (cd "$i" && npm publish)
+  (cd "$i" && npm pack && cp *.tgz ../../../../dist/sdk-js/)
 done
-
-# Upload Cord 4.0's versioned CSS to S3 to be publicly served.
-( cd ../../.. && scripts/upload-CSS.mjs )
+cd ..
 
 # Remove builds
 git clean -fdx
 
 echo
 echo "Done!"
-echo
-echo "Remember to update the open source repo."
-echo "See scripts/sync-opensource-repo.ts for instructions."
