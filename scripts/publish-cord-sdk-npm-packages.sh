@@ -45,14 +45,14 @@ npm run build
 # numbers of SDK packages in our `package-lock.json`
 ( cd ../.. && npm install )
 
-rm -rf ../../dist/sdk-js
-mkdir ../../dist/sdk-js
+OUTDIR=$(realpath ../../dist/external/sdk-js)
+mkdir "$OUTDIR"
 
 # Publish them to npm
 cd packages
 for i in */
 do
-  (cd "$i" && npm pack && cp *.tgz ../../../../dist/sdk-js/)
+  (cd "$i" && npm pack && cp *.tgz "$OUTDIR")
 done
 cd ..
 
