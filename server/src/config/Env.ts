@@ -220,7 +220,4 @@ export default magicEnv(process.env, {
   STRIPE_WEBHOOK_SECRET_KEY: required,
 
   DEMO_APPS_SHARED_SECRET: required,
-
-  // loops.so for sending newletters
-  LOOPS_SO_API_KEY: required,
 });

@@ -1,4 +1,3 @@
-import { ManagementClient } from 'auth0';
 import { CORD_SELF_SERVE_SLACK_CHANNEL_ID } from 'common/const/Ids.ts';
 import { LogLevel } from 'common/types/index.ts';
 import { assertConsoleUser } from 'server/src/auth/index.ts';
@@ -12,8 +11,6 @@ import {
   createNewCustomer as createNewCustomerEntity,
   findCustomerIDsWithSameDomainConsoleUsers,
 } from 'server/src/util/selfServe.ts';
-import { addNewConsoleUserToLoops } from 'server/src/util/loops.ts';
-import Env from 'server/src/config/Env.ts';
 
 export const syncUserMutationResolver: Resolvers['Mutation']['syncUser'] =
   async (_, args, context) => {
@@ -31,30 +28,6 @@ export const syncUserMutationResolver: Resolvers['Mutation']['syncUser'] =
         picture: picture ?? undefined,
         verified: context.session?.console?.email_verified,
       });
-      const auth0 = new ManagementClient({
-        clientId: Env.AUTH0_MTM_CLIENT_ID,
-        domain: Env.AUTH0_GENERAL_DOMAIN,
-        clientSecret: Env.AUTH0_MTM_CLIENT_SECRET,
-        scope: 'read:users',
-      });
-
-      if (!user.loopsUserID) {
-        let firstName: string | undefined = undefined;
-        let lastName: string | undefined = undefined;
-        if (user.auth0UserID) {
-          const auth0User = await auth0.getUser({ id: user.auth0UserID });
-          firstName = auth0User.given_name;
-          lastName = auth0User.family_name;
-        }
-
-        await addNewConsoleUserToLoops({
-          email,
-          consoleUserId: user.id,
-          firstName: firstName,
-          lastName: lastName,
-          context,
-        });
-      }
 
       const featureFlagUser = {
         userID: user.id,

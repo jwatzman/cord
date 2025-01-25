@@ -48,7 +48,6 @@ const secretIDs = {
   GA_MEASUREMENT_PROTOCOL_API: 'ga_measurement_protocol_api',
   STRIPE_SECRET_KEY: 'stripe_secret_key',
   DEMO_APPS_SHARED_SECRET: 'demo_apps_shared_secret',
-  LOOPS_SO_API_KEY: 'loops_so_api_key',
 };
 
 // Construct a `secrets` object, that has a property for each defined secret
@@ -196,7 +195,6 @@ function buildProdEnv(commitHash) {
     STRIPE_SECRET_KEY: secrets.STRIPE_SECRET_KEY.prod_key,
     STRIPE_WEBHOOK_SECRET_KEY: secrets.STRIPE_SECRET_KEY.webhook_prod_key,
     DEMO_APPS_SHARED_SECRET: secrets.DEMO_APPS_SHARED_SECRET.key,
-    LOOPS_SO_API_KEY: secrets.LOOPS_SO_API_KEY.api_key,
   };
 }
 
