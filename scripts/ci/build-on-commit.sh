@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
+
+set -eu
 
 # ~~~ BUILD ON COMMIT ~~~
 # This script is run by the GitHub workflow 'build-and-deploy-on-push' each

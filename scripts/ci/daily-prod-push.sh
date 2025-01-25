@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+
+set -e
 
 # ~~~ DAILY PROD PUSH ~~~
 # This script is run by a cronjob on workdays in the morning. This is for the

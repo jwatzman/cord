@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+
+set -e
 
 # Run this script to find code that is exported from our TS files but not
 # actually referenced by any other code.  In general, that code doesn't need to

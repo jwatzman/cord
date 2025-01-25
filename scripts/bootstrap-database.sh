@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
+
+set -eu
 
 # Pass the authorization token to this script to have your local database
 # reset completely (wiped!) and populated with data from our prod database.

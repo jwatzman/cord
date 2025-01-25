@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
+
+set -eu
 
 # Make fetch happen:
 # - updates `origin/master` from the central repository

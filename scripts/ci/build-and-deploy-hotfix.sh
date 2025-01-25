@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
+
+set -eu
 
 # ~~~ BUILD AND DEPLOY A HOTFIX ~~~
 # This script is run by GitHub when invoked manually to build and deploy a hotfix.
