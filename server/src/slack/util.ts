@@ -89,8 +89,6 @@ import type { FlagsUser } from 'server/src/featureflags/index.ts';
 import { findSlackUserEmailMatch } from 'server/src/util/findSlackUserEmailMatch.ts';
 import { withSlackMirroredThreadLock } from 'server/src/util/locks.ts';
 import { ThreadMutator } from 'server/src/entity/thread/ThreadMutator.ts';
-import { getBadgedImageURL } from 'server/src/image_processing/badge.ts';
-import { getResizedImageURL } from 'server/src/image_processing/resizeOnly.ts';
 import { Counter } from 'server/src/logging/prometheus.ts';
 import { FeatureFlag } from 'common/const/UserPreferenceKeys.ts';
 import { injectDeeplinkQueryParamsV1 } from 'server/src/deep_link_threads/index.ts';
@@ -1457,7 +1455,6 @@ async function getUserAndAttributionForUser(
         : slackLinkedUser
         ? userDisplayName(slackLinkedUser)
         : originalProfileDisplayDetails.displayName;
-    let badgeLogoURL: string | null = null;
 
     if (
       originalUser.externalProvider === AuthProviderType.PLATFORM &&
@@ -1469,14 +1466,12 @@ async function getUserAndAttributionForUser(
 
       if (application) {
         username = `${username} (on ${application.name})`;
-        badgeLogoURL = application.iconURL;
       }
       // If the message originated from Slack in the first place, don't add '(via Cord)'
     } else if (!isScrapedSlackMessage) {
       // If it is a scraped slack message, we will use an unbadged picture
       // so it looks like a normal Slack profile
       username = `${username} (via Cord)`;
-      badgeLogoURL = `${APP_ORIGIN}/static/provider-icons/cord.png`;
     }
 
     iconURL =
@@ -1485,32 +1480,6 @@ async function getUserAndAttributionForUser(
         : slackLinkedUser?.profilePictureURL ??
           originalProfileDisplayDetails.profilePictureURL ??
           undefined;
-
-    if (
-      iconURL &&
-      (badgeLogoURL || isScrapedSlackMessage) &&
-      (await getFeatureFlagValue('badge_attribution_avatar', {
-        userID,
-        orgID,
-        platformApplicationID:
-          context.session.viewer.platformApplicationID ?? 'extension',
-        version: context.clientVersion,
-      }))
-    ) {
-      try {
-        iconURL = badgeLogoURL
-          ? await getBadgedImageURL(iconURL, badgeLogoURL)
-          : await getResizedImageURL(iconURL);
-      } catch (err) {
-        context.logger.logException(
-          'getBadgedImageURL or getResizedImageURL',
-          err,
-          undefined,
-          undefined,
-          'warn',
-        );
-      }
-    }
   }
 
   return {

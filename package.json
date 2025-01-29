@@ -215,7 +215,6 @@
     "sequelize-typescript": "^2.1.6",
     "serialize-error": "^11.0.3",
     "sha.js": "^2.4.11",
-    "sharp": "^0.32.6",
     "slack-markdown": "0.1.1",
     "slate": "^0.100.0",
     "slate-history": "^0.100.0",

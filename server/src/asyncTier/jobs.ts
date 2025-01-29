@@ -5,7 +5,6 @@ import checkAWSCredentials from 'server/src/asyncTier/jobs/checkAWSCredentials.t
 import databaseTidyUpJob from 'server/src/asyncTier/jobs/databaseTidyUp.ts';
 import exampleJob from 'server/src/asyncTier/jobs/example.ts';
 import generateAWSCredentialsReport from 'server/src/asyncTier/jobs/generateAWSCredentials.ts';
-import resizeProfilePicture from 'server/src/asyncTier/jobs/resizeProfilePicture.ts';
 import notifyWebhook from 'server/src/asyncTier/jobs/notifyWebhook.ts';
 import rotateAllJiraRefreshTokens from 'server/src/asyncTier/jobs/jiraRefreshTokenRotate.ts';
 import sendEmailNotification from 'server/src/asyncTier/jobs/sendEmailNotificationWithDelay.ts';
@@ -28,7 +27,6 @@ export const asyncJobList = [
   exampleJob,
   generateAWSCredentialsReport,
   generateLinkPreviews,
-  resizeProfilePicture,
   rotateAllJiraRefreshTokens,
   sendEmailNotification,
   sendSlackNotificationWithDelay,

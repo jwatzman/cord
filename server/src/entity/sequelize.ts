@@ -42,8 +42,6 @@ import { SlackMirroredThreadEntity } from 'server/src/entity/slack_mirrored_thre
 import { MessageOutboundNotificationEntity } from 'server/src/entity/message_notification/MessageOutboundNotificationEntity.ts';
 import { ConsoleUserEntity } from 'server/src/entity/user/ConsoleUserEntity.ts';
 import { UserHiddenAnnotationsEntity } from 'server/src/entity/user_hidden_annotations/UserHiddenAnnotationsEntity.ts';
-import { ExternalAssetEntity } from 'server/src/entity/extrernal_asset/ExternalAssetEntity.ts';
-import { ImageVariantEntity } from 'server/src/entity/image_variant/ImageVariantEntity.ts';
 import { EmailOutboundNotificationEntity } from 'server/src/entity/email_notification/EmailOutboundNotificationEntity.ts';
 import { SlackMirroredSupportThreadEntity } from 'server/src/entity/slack_mirrored_support_thread/SlackMirroredSupportThreadEntity.ts';
 import { DeploysEntity } from 'server/src/entity/deploys/DeploysEntity.ts';
@@ -178,8 +176,6 @@ const apiSequelizeOptions: SequelizeOptions = {
     MessageOutboundNotificationEntity,
     ConsoleUserEntity,
     UserHiddenAnnotationsEntity,
-    ExternalAssetEntity,
-    ImageVariantEntity,
     EmailOutboundNotificationEntity,
     SlackMirroredSupportThreadEntity,
     ApplicationUsageMetricEntity,
